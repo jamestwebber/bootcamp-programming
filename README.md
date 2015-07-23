@@ -5,7 +5,7 @@ This repository is for the UCSF iPQB/CCB programming project during bootcamp. Wh
 ## What that means
 
  * UCSF is the [University of California, San Francisco](http://www.ucsf.edu).
- * iPQB is the [Integrate Program in Quantitative Biology](http://ipqb.ucsf.edu/) and CCB is the [Chemistry and Chemical Biology](http://ipqb.ucsf.edu/) program.
+ * iPQB is the [Integrative Program in Quantitative Biology](http://ipqb.ucsf.edu/) and CCB is the [Chemistry and Chemical Biology](http://ccb.ucsf.edu/) program.
  * We have a [student-run bootcamp](http://bootcamp.ipqb.org) to teach incoming graduate students the basics.
  * This repository is for the [programming module](http://bootcamp.ipqb.org/programming) of that bootcamp.
  
