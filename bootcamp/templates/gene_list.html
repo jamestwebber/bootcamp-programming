@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block title %}{{ label|capitalize }} {{ n }} genes for Experiment {{ exp }}{% endblock %}
+{% block body %}
+  <div class="row">
+    <div class="col-md-2">Systematic Name</div>
+    <div class="col-md-4">Gene Name</div>
+    <div class="col-md-2">Fold-Change</div>
+    <div class="col-md-2">SGD Link</div>
+  </div>
+{% for gene in genes %}
+  <div class="row">
+    <div class="col-md-2"><a href="{{ url_for('gene_info', gene=gene[0]) }}">{{ gene[0] }}</a></div>
+    <div class="col-md-4">{% if gene[1] %}{{ gene[1] }}{% else %}Maybe implement <code>gene_name()</code>{% endif %}</div>
+    <div class="col-md-2">{{ "%g"|format(gene[2]) }}</div>
+    <div class="col-md-2"><a href="http://www.yeastgenome.org/cgi-bin/locus.fpl?locus={{ gene[0] }}" target="_blank">{{ gene[0] }}</a></div>
+  </div>
+{% else %}
+  <div class="row">
+    <div class="col-md-8">There <em>would</em> be some genes here, if you implemented <code>experiment()</code></div>
+  </div>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block title %}Experiment {{ exp }}{% endblock %}
+{% block body %}
+  <div class="row">
+    <div class="col-md-8 h3">Genes</div>
+  </div>
+  <div class="row">
+    <div class="col-md-8"><a href="{{ url_for('gene_list', exp=exp, top_or_bottom='top', n=10) }}">Top 10 Genes</a></div>
+  </div>
+  <div class="row">
+    <div class="col-md-8"><a href="{{ url_for('gene_list', exp=exp, top_or_bottom='bottom', n=10) }}">Bottom 10 Genes</a></div>
+  </div>
+  <div class="row">
+    <div class="col-md-8 h3">Enrichment</div>
+  </div>
+  <div class="row">
+    <div class="col-md-8"><a href="{{ url_for('enrichment', exp=exp, aspect='P', n=20) }}">Process</a></div>
+  </div>
+  <div class="row">
+    <div class="col-md-8"><a href="{{ url_for('enrichment', exp=exp, aspect='C', n=20) }}">Component</a></div>
+  </div>
+  <div class="row">
+    <div class="col-md-8"><a href="{{ url_for('enrichment', exp=exp, aspect='F', n=20) }}">Function</a></div>
+  </div>
+  <div class="row">
+    <div class="col-md-8 h3">Visualization</div>
+  </div>
+  <div class="row">
+    <div class="col-md-8" id="fig01">{% if not fig_dict %}There could be a cool figure here, if you implement <code>plot_experiment()</code>{% endif %}</div>
+  </div>
+  {% if fig_dict %}
+  <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+  <script type="text/javascript" src="http://mpld3.github.io/js/mpld3.v0.1.js"></script>
+  <script type="text/javascript">
+    var json01 = {{ fig_dict | tojson }};
+    mpld3.draw_figure("fig01", json01);
+  </script>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block title %}Enrichment results for Experiment {{ exp }}{% endblock %}
+{% block body %}
+  <div class="row"><div class="col-md-6"><h3>Positive Enrichment</h3></div></div>
+  <div class="row">
+    <div class="col-md-2">GOID</div>
+    <div class="col-md-4">GO term</div>
+    <div class="col-md-4">Enrichment Score</div>
+  </div>
+{% for goid,score in e_scores if score %}
+  <div class="row">
+    <div class="col-md-2"><a href="{{ url_for('go_term_info', goid=goid) }}">{{ goid }}</a></div>
+    <div class="col-md-4">{% if go_info %}{{ go_info[goid][0] }}{% else %}Implement go_info(){% endif %}</div>
+    <div class="col-md-4">{{ "%g"|format(score) }}</div>
+  </div>
+{% else %}
+  <div class="row">
+    <div class="col-md-10">There's nothing here because you need to implement <code>calculate_enrichment()</code></div>
+  </div>
+{% endfor %}
+  <div class="row"><div class="col-md-10"><h3>Negative Enrichment</h3></div></div>
+  <div class="row">
+    <div class="col-md-2">GOID</div>
+    <div class="col-md-4">GO term</div>
+    <div class="col-md-4">Enrichment Score</div>
+  </div>
+{% for goid,score in ne_scores if score %}
+  <div class="row">
+    <div class="col-md-2"><a href="{{ url_for('go_term_info', goid=goid) }}">{{ goid }}</a></div>
+    <div class="col-md-4">{% if go_info %}{{ go_info[goid][0] }}{% else %}Implement go_info(){% endif %}</div>
+    <div class="col-md-4">{{ "%g"|format(score) }}</div>
+  </div>
+{% else %}
+  <div class="row">
+    <div class="col-md-10">There's nothing here because you need to implement <code>calculate_enrichment()</code></em></div>
+  </div>
+{% endfor %}
+{% endblock %}

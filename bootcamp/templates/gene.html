@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block title %}
+  {% if gene_name -%}
+    GO terms for {{ gene_name }}
+  {%- else -%}
+    GO terms for a mysterious gene
+  {%- endif %}
+{% endblock %}
+{% block body %}
+  <div class="row"><div class="col-md-10 h4">
+{% if gene_info %}{{ gene_info }}{% else -%}
+If you implemented <code>gene_info()</code>, you'd see something here
+{%- endif %}
+  </div></div>
+  <div class="row">
+    <div class="col-md-2">GOID</div>
+    <div class="col-md-4">Term</div>
+    <div class="col-md-2">Aspect</div>
+  </div>
+{% for go_term in go_terms %}
+  <div class="row">
+    <div class="col-md-2"><a href="{{ url_for('go_term_info', goid=go_term[0]) }}">{{ go_term[0] }}</a></div>
+    <div class="col-md-4">{{ go_term[1][0] }}</div>
+    <div class="col-md-2">{{ go_term[1][1] }}</div>
+  </div>
+{% else %}
+  <div class="row">
+    <div class="col-md-10">There <em>would</em> be some GO terms here, if you implemented <code>gene_to_go()</code></div>
+  </div>
+{% endfor %}
+{% endblock %}
