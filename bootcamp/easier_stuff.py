@@ -51,6 +51,13 @@ def gene_name(gene):
     pass
 
 
+# map from a gene's systematic name to a list of the values for that gene,
+# across all of the experiments.
+# e.g. gene_data('YGR188C') returns [-0.09, 0.2, -0.07, ... ]
+def gene_data(gene):
+    pass
+
+
 # map from a systematic name to some info about the gene (whatever you want),
 # e.g  'YGR188C' -> 'Protein kinase involved in the cell cycle checkpoint into anaphase'
 def gene_info(gene):

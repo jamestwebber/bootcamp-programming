@@ -36,9 +36,17 @@ def gene_info(gene):
 
     go_terms = es.gene_to_go(gene)
     go_terms = [(goid, es.go_info(goid)) for goid in go_terms]
+    gene_data = es.gene_data(gene)
+    if gene_data is None:
+        flash("You need to implement <code>gene_data()</code>")
+        hist_data = None
+    else:
+        gene_hist,bins = np.histogram(gene_data, bins=np.linspace(-8, 8, 33))
+        hist_data = zip(bins[:-1], gene_hist)
 
     return render_template("gene.html", gene_name=gene_name,
-                           gene_info=gene_info, go_terms=go_terms)
+                           gene_info=gene_info, go_terms=go_terms,
+                           hist_data=hist_data)
 
 
 @app.route('/goid/<goid>')

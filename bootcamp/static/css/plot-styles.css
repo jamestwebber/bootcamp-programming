@@ -1,0 +1,22 @@
+/**
+ * CSS settings for d3 plots
+ *
+ */
+.d3 {
+  font-size: 14px; }
+
+.d3 h5 {
+  height: 35px; }
+
+.d3 svg {
+  background-color: #ffffff; }
+
+.d3 .axis path, .d3 .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges; }
+
+.d3 .dot, .d3 .bar {
+  stroke: #000;
+  opacity: 0.9;
+  fill: #9e9ac8; }
