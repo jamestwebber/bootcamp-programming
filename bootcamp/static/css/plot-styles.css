@@ -20,3 +20,31 @@
   stroke: #000;
   opacity: 0.9;
   fill: #9e9ac8; }
+
+.d3 .node circle {
+  stroke: #fff;
+  stroke-width: 2px;
+}
+
+.d3 .link {
+  stroke: #999;
+  stroke-opacity: .6;
+  stroke-width: 2px;
+}
+
+.d3 .node text {
+  font: 10px sans-serif;
+}
+
+.d3 .node text a {
+  fill: #F17CB0;
+}
+
+.d3 .node text a:visited {
+  fill: #F15854;
+}
+
+.d3 .node text a:hover, text a:active {
+  text-decoration: underline;
+  fill: #B276B2;
+}

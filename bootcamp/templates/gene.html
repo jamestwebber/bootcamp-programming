@@ -20,8 +20,8 @@ If you implemented <code>gene_info()</code>, you'd see something here
 {% for go_term in go_terms %}
   <div class="row">
     <div class="col-md-2"><a href="{{ url_for('go_term_info', goid=go_term[0]) }}">{{ go_term[0] }}</a></div>
-    <div class="col-md-4">{{ go_term[1][0] }}</div>
-    <div class="col-md-2">{{ go_term[1][1] }}</div>
+    <div class="col-md-4">{% if go_term[1] %}{{ go_term[1][0] }}{% endif %}</div>
+    <div class="col-md-2">{% if go_term[1] %}{{ go_term[1][1] }}{% endif %}</div>
   </div>
 {% else %}
   <div class="row">
@@ -32,30 +32,59 @@ If you implemented <code>gene_info()</code>, you'd see something here
     <div class="col-md-8 h3">Visualization</div>
   </div>
   <div class="row">
-    <div class="col-md-10" id="fig01">{% if not hist_data %}There could be a cool figure here, if you implement <code>gene_data()</code>{% endif %}</div>
+    <div class="col-md-10" id="fig01">{% if not local_network %}There could be a cool figure here, if you implement <code>go_network()</code>{% endif %}</div>
+  </div>
+  <div class="row">
+    <div class="col-md-10" id="fig02">{% if not hist_data %}There could be a cool figure here, if you implement <code>gene_data()</code>{% endif %}</div>
   </div>
 {% endblock %}
 {% block jscript %}
-{% if hist_data %}
-  <script type="text/javascript">
-    var json01 = {{ hist_data | tojson }};
-    var h_chart = histogram().height(400)
-      .margin({ top: 40, right: 40, bottom: 100, left: 60 })
+{% if local_network %}
+    var json01 = {{ local_network | tojson }};
+    var forcenet = network().height(600)
       .width(parseInt(d3.select('#fig01').style('width'), 10))
+
+    d3.select("div#fig01").datum(json01)
+      .call(forcenet);
+
+    {% if not hist_data %}
+    d3.select(window).on('resize', function()
+    {
+      d3.select("div#fig01").datum(json01)
+        .call(forcenet.width(parseInt(d3.select('#fig01').style('width'), 10)));
+    });
+    {% endif %}
+{% endif %}
+{% if hist_data %}
+    var json02 = {{ hist_data | tojson }};
+    var h_chart = histogram().height(300)
+      .margin({ top: 40, right: 40, bottom: 100, left: 60 })
+      .width(parseInt(d3.select('#fig02').style('width'), 10))
       .id(function(d) { return +d[0]; })
       .x(function(d) { return +d[0]; })
       .y(function(d) { return +d[1]; })
       .xLabel("Z-Scored Expression")
       .yLabel("Count");
 
-    d3.select("div#fig01").datum(json01)
+    d3.select("div#fig02").datum(json02)
       .call(h_chart);
 
+    {% if not local_network %}
+    d3.select(window).on('resize', function()
+    {
+      d3.select("div#fig02").datum(json02)
+        .call(h_chart.width(parseInt(d3.select('#fig02').style('width'), 10)));
+    });
+    {% endif %}
+{% endif %}
+{% if hist_data and local_network %}
     d3.select(window).on('resize', function()
     {
       d3.select("div#fig01").datum(json01)
-        .call(h_chart.width(parseInt(d3.select('#fig01').style('width'), 10)));
+        .call(forcenet.width(parseInt(d3.select('#fig01').style('width'), 10)));
+
+      d3.select("div#fig02").datum(json02)
+        .call(h_chart.width(parseInt(d3.select('#fig02').style('width'), 10)));
     });
-  </script>
 {% endif %}
 {% endblock %}

@@ -17,7 +17,7 @@ from . import app # this is part of the website guts
 
 
 
-# These are all the files you have to work with. Go open them in a text  editor so you can
+# These are all the files you have to work with. Go open them in a text editor so you can
 # get a feel for what they look like, because you need to parse each one to turn on a
 # piece of the website.
 
@@ -77,8 +77,8 @@ def go_aspect(aspect):
     pass
 
 
-# map from a GOID (e.g. GO:0005737) to a *tuple* of the term and term definition
-# e.g. 'GO:0005737' -> ('cytoplasm', 'All of the contents of a cell... (etc)'
+# map from a GOID (e.g. GO:0005737) to a *tuple* of the term, aspect, and term definition
+# e.g. 'GO:0005737' -> ('cytoplasm', 'C', 'All of the contents of a cell... (etc)'
 def go_info(goid):
     pass
 

@@ -23,6 +23,18 @@
     <div class="col-md-8"><a href="{{ url_for('enrichment', exp=exp, aspect='F', n=20) }}">Function</a></div>
   </div>
   <div class="row">
+    <div class="col-md-8 h3">Here are the {{ n }} most-similar experiments</div>
+  </div>
+{% for sim_exp in similar_exp %}
+  <div class="row">
+    <div class="col-md-4"><a href="{{ url_for('experiment', exp=sim_exp) }}">Experiment {{ sim_exp }}</a></div>
+  </div>
+{% else %}
+  <div class="row">
+    <div class="col-md-8">...or there <em>would</em> be if you implemented <code>similar_experiments()</code></div>
+  </div>
+{% endfor %}
+  <div class="row">
     <div class="col-md-8 h3">Visualization</div>
   </div>
   <div class="row">

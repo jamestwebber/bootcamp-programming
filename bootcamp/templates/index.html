@@ -3,6 +3,7 @@
 {% block body -%}
   <div class="row">
     <div class="col-md-4 col-md-offset-2 h4">It's the...</div>
+  </div>
   <div class="row">
     <div class="col-md-8 h2"><u>B</u>ioinformatics <u>L</u>esson <u>A</u>bout <u>G</u>O</div>
   </div>
@@ -21,4 +22,14 @@
     <div class="col-md-4">...or there <em>would</em> be if you implemented <code>experiment()</code></div>
   </div>
 {% endfor %}
+<div class="row">
+  <div class="col-md-8 h3">Overview</div>
+</div>
+<div class="row">
+  <div class="col-md-8" id="fig01">
+  {% if fig_path %}<img src="/{{ fig_path }}"/>
+  {% else %}There could be a cool figure here, if you implement <code>plot_experiment_overview()</code>
+  {% endif %}
+  </div>
+</div>
 {%- endblock %}
