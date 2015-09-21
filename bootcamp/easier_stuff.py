@@ -13,7 +13,13 @@
 
 # (don't delete this but don't worry about it either)
 import os # a built-in module, for dealing with filenames
-from . import app # this is part of the website guts
+if __name__ != '__main__':
+    from . import app # this is part of the website guts
+    root_path = app.root_path
+elif '__file__' in locals():
+    root_path = os.path.abspath(os.path.split(__file__)[0])
+else:
+    root_path = os.path.abspath(os.curdir)
 
 
 
@@ -22,18 +28,18 @@ from . import app # this is part of the website guts
 # piece of the website.
 
 # A list of yeast genes, with standard names and short descriptions.
-GENE_INFO = os.path.join(app.root_path, 'data', 'gene_info.txt')
+GENE_INFO = os.path.join(root_path, 'data', 'gene_info.txt')
 
 # A file that maps from GOID to name, aspect (process/function/component), etc
-GO_INFO = os.path.join(app.root_path, 'data', 'go_info.txt')
+GO_INFO = os.path.join(root_path, 'data', 'go_info.txt')
 
 # A two-column file that maps GOID to yeast genes
-GO_MEMBERSHIP = os.path.join(app.root_path, 'data', 'go_membership.txt')
+GO_MEMBERSHIP = os.path.join(root_path, 'data', 'go_membership.txt')
 
 # A many-columned file that contains experimental data (yeast microarrays). Each column
 # (after the first) is a different experiment, and each row is a gene. The values are log2
 # ratios versus untreated control.
-EXPERIMENT_FILE = os.path.join(app.root_path, 'data', 'experiment_data.txt')
+EXPERIMENT_FILE = os.path.join(root_path, 'data', 'experiment_data.txt')
 
 
 # return a list or dictionary that maps from the id of an experiment (an int: 0, 1, ..)
